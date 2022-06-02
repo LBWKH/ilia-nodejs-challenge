@@ -1,5 +1,14 @@
-import { Controller, Get, Post } from '@nestjs/common';
-import { TransactionsService } from 'src/services/transactions.service';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  TransactionsService,
+  TransactionTypes,
+} from 'src/services/transactions.service';
+
+type CreateTransactionPayload = {
+  user_id: string;
+  type: TransactionTypes;
+  amount: number;
+};
 
 @Controller('transactions')
 export class TransactionsController {
@@ -11,7 +20,10 @@ export class TransactionsController {
   }
 
   @Post()
-  createTransaction() {
-    return this.transactionsService.create();
+  createTransaction(@Body() { user_id, ...payload }: CreateTransactionPayload) {
+    return this.transactionsService.create({
+      userId: user_id,
+      ...payload,
+    });
   }
 }
