@@ -11,6 +11,10 @@ type CreateTransactionParams = {
   type: TransactionTypes;
   amount: number;
 };
+
+type BalanceResult = {
+  amount: number;
+};
 @Injectable()
 export class TransactionsService {
   constructor(private prisma: PrismaService) {}
@@ -38,6 +42,14 @@ export class TransactionsService {
   }
 
   async balance() {
-    return 10;
+    const [result] = await this.prisma.$queryRaw<BalanceResult[]>`select 
+      SUM(
+        CASE WHEN t."type" = 'CREDIT' then t.amount else - t.amount END
+      ) AS amount 
+    from 
+      "Transaction" t
+    `;
+
+    return result;
   }
 }
