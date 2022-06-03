@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  database:
+    image: 'postgres'
+    ports: 
+      - '5440:5432'
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: users
+    volumes: 
+      - 'postgresql_data:/bitnami/postgresql'
+
+volumes:
+  postgresql_data:
+    driver: local
