@@ -8,8 +8,8 @@ import { JwtStrategyService } from './jwt-strategy.service';
   controllers: [AuthController],
   imports: [
     JwtModule.register({
-      secret: 'ILIACHALLENGE',
-      signOptions: { expiresIn: '60s' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1d' },
     }),
   ],
   providers: [AuthService, JwtStrategyService],
