@@ -36,4 +36,8 @@ export class TransactionsService {
 
     return { user_id, ...response };
   }
+
+  async balance() {
+    return 10;
+  }
 }
