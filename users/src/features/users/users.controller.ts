@@ -42,16 +42,19 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(JwtGuard)
   async getUserById(@Param('id') id: string) {
     return this.usersService.getUser(id);
   }
 
   @Patch(':id')
+  @UseGuards(JwtGuard)
   updateUser(@Param('id') id: string, @Body() body: UpdateUserPayload) {
     return this.usersService.update(id, body);
   }
 
   @Delete(':id')
+  @UseGuards(JwtGuard)
   deleteUser(@Param('id') id: string) {
     this.usersService.delete(id);
     return {};

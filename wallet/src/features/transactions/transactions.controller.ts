@@ -3,7 +3,7 @@ import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import {
   TransactionsService,
   TransactionTypes,
-} from 'src/services/transactions.service';
+} from '../../services/transactions.service';
 import { JwtGuard } from '../auth/jwt.guard';
 
 type CreateTransactionPayload = {

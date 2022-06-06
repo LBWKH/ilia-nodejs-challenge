@@ -9,12 +9,6 @@ export class AuthController {
   login(@Body() body) {
     const token = this.authService.login(body.email, body.password);
 
-    return { token };
-  }
-
-  @Get('teste')
-  @UseGuards(JwtGuard)
-  teste() {
-    return 'desprotegido';
+    return token;
   }
 }

@@ -1,16 +1,7 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 
-import {
-  TransactionsService,
-  TransactionTypes,
-} from 'src/services/transactions.service';
+import { TransactionsService } from 'src/services/transactions.service';
 import { JwtGuard } from '../auth/jwt.guard';
-
-type CreateTransactionPayload = {
-  user_id: string;
-  type: TransactionTypes;
-  amount: number;
-};
 
 @Controller('balances')
 export class BalancesController {
