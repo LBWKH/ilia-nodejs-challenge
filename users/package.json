@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@prisma/client": "^3.14.0",
     "bcrypt": "^5.0.1",
+    "kafkajs": "^2.0.2",
     "passport": "^0.5.3",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
