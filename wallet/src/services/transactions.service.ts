@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/database/prisma/prisma.service';
+import { PrismaService } from '../database/prisma/prisma.service';
 
 export enum TransactionTypes {
   credit = 'CREDIT',
@@ -19,8 +19,10 @@ type BalanceResult = {
 export class TransactionsService {
   constructor(private prisma: PrismaService) {}
 
-  async getAll() {
-    const allTransactions = await this.prisma.transaction.findMany();
+  async getAll(type: TransactionTypes) {
+    const allTransactions = await this.prisma.transaction.findMany({
+      where: { type },
+    });
 
     const formattedTransactions = allTransactions.map(
       ({ userId, ...transaction }) => ({

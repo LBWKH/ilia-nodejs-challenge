@@ -28,7 +28,7 @@ export class AuthService {
   constructor(private jwtService: JwtService) {}
   login(email, password) {
     const user = this.validateCredentials(email, password);
-    const payload = { sub: user.id, email: user.username };
+    const payload = { sub: user?.id, email: user?.username };
 
     return this.jwtService.sign(payload);
   }

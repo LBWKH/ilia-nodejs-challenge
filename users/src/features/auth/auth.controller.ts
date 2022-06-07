@@ -8,6 +8,6 @@ export class AuthController {
   login(@Body() body) {
     const token = this.authService.login(body.email, body.password);
 
-    return { token };
+    return token;
   }
 }
