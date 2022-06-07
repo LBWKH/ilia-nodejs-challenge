@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { compareSync } from 'bcrypt';
+
 import { PrismaService } from 'src/database/prisma/prisma.service';
 
 @Injectable()
@@ -22,7 +22,6 @@ export class AuthService {
 
     const user = users.find(
       (item) => item.email === email && item.password === password,
-      // && compareSync(password, item.password),
     );
 
     return user;
