@@ -1,6 +1,6 @@
 import { Controller, Get, UseGuards } from '@nestjs/common';
 
-import { TransactionsService } from 'src/services/transactions.service';
+import { TransactionsService } from '../../services/transactions.service';
 import { JwtGuard } from '../auth/jwt.guard';
 
 @Controller('balances')

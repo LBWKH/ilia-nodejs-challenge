@@ -1,49 +1,34 @@
 import { prismaMock } from '../../../singleton';
-import {
-  allTransactions,
-  allTransactionsFormatted,
-  newTransaction,
-  newTransactionPayload,
-  newTransactionResult,
-} from '../../../test/mocks/transactions-mocks';
+
 import { TransactionsService } from '../../services/transactions.service';
 import { mocked } from 'jest-mock';
-import { TransactionsController } from '../transactions/transactions.controller';
+import { BalancesController } from '../balances/balances.controller';
 import { PrismaService } from '../../database/prisma/prisma.service';
+import { balanceMock } from '../../../test/mocks/balances-mocks';
 
 jest.mock('../../database/prisma/prisma.service.ts');
-describe('Transactions Use Case', () => {
+describe('Balances Use Case', () => {
   const MockedPrismaService = mocked(PrismaService, true);
-  const create = jest.fn().mockResolvedValue(newTransaction);
-  const findMany = jest.fn().mockResolvedValue(allTransactions);
+
+  const $queryRaw = jest.fn().mockResolvedValue(balanceMock);
   MockedPrismaService.mockImplementation(
     () =>
       ({
-        transaction: { findMany, create },
+        $queryRaw,
       } as unknown as PrismaService),
   );
   const prismaServiceMock = new PrismaService();
-  let transactionsController: TransactionsController;
+  let balancesController: BalancesController;
   let transactionsService: TransactionsService;
 
   beforeEach(() => {
     transactionsService = new TransactionsService(prismaServiceMock);
-    transactionsController = new TransactionsController(transactionsService);
+    balancesController = new BalancesController(transactionsService);
   });
 
-  it('should be able to create a new transaction', async () => {
-    prismaMock.transaction.create.mockResolvedValueOnce(newTransaction);
+  it('should be able to get the balance from all transactions', async () => {
+    prismaMock.$queryRaw.mockResolvedValueOnce(balanceMock);
 
-    await expect(
-      transactionsController.createTransaction(newTransactionPayload),
-    ).resolves.toEqual(newTransactionResult);
-  });
-
-  it('should be able to get all the currently existing transactions', async () => {
-    prismaMock.transaction.findMany.mockResolvedValueOnce(allTransactions);
-
-    await expect(transactionsController.transactions()).resolves.toEqual(
-      allTransactionsFormatted,
-    );
+    await expect(balancesController.balances()).resolves.toEqual(balanceMock);
   });
 });

@@ -8,7 +8,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { UsersService } from 'src/services/users.service';
+import { UsersService } from '../../services/users.service';
 import { JwtGuard } from '../auth/jwt.guard';
 
 type CreateUserPayload = {

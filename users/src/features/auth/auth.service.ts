@@ -10,7 +10,7 @@ export class AuthService {
   async login(email, password) {
     const user = await this.validateCredentials(email, password);
 
-    const payload = { sub: user.id, email: user.email };
+    const payload = { sub: user?.id, email: user?.email };
 
     const token = this.jwtService.sign(payload);
 
@@ -19,12 +19,11 @@ export class AuthService {
 
   private async validateCredentials(email, password) {
     const users = await this.prisma.user.findMany();
-    console.log('all', users);
+
     const user = users.find(
       (item) => item.email === email && item.password === password,
       // && compareSync(password, item.password),
     );
-    console.log('one', user);
 
     return user;
   }

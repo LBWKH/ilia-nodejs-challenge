@@ -19,8 +19,10 @@ type BalanceResult = {
 export class TransactionsService {
   constructor(private prisma: PrismaService) {}
 
-  async getAll() {
-    const allTransactions = await this.prisma.transaction.findMany();
+  async getAll(type: TransactionTypes) {
+    const allTransactions = await this.prisma.transaction.findMany({
+      where: { type },
+    });
 
     const formattedTransactions = allTransactions.map(
       ({ userId, ...transaction }) => ({

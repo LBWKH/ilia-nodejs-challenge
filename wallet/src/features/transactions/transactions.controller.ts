@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
 
 import {
   TransactionsService,
@@ -18,8 +18,8 @@ export class TransactionsController {
 
   @Get()
   @UseGuards(JwtGuard)
-  transactions() {
-    return this.transactionsService.getAll();
+  transactions(@Query() type: TransactionTypes) {
+    return this.transactionsService.getAll(type);
   }
 
   @Post()
