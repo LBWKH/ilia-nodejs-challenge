@@ -18,7 +18,6 @@ describe('Users Use Case', () => {
   const findMany = jest.fn().mockResolvedValue(allUsers);
   const findUnique = jest.fn().mockResolvedValue(newUser);
   const update = jest.fn().mockResolvedValue(updatedUser);
-  // const delete = jest.fn().mockResolvedValue();
 
   MockedPrismaService.mockImplementation(
     () =>

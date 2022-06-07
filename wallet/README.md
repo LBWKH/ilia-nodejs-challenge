@@ -11,7 +11,7 @@ Main used tools:
 - [TypeScript][typescript]
 - [NestJS][nestjs]
 - [Prisma][prisma]
-- [Jest][jests]
+- [Jest][jest]
 
 ### 🎲 How to start the application:
 
